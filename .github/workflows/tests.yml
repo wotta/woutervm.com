@@ -49,12 +49,12 @@ jobs:
       - name: Create SQLite database
         run: |
           mkdir -p database
-          touch database.sqlite
+          touch testing.sqlite
 
       - name: Run migrations
         env:
           DB_CONNECTION: sqlite
-          DB_DATABASE: database/database.sqlite
+          DB_DATABASE: database/testing.sqlite
         run: php artisan migrate
 
       - name: Tests
