@@ -16,7 +16,9 @@ test('Panel can be rendered', function () {
 test('Panel can be accessed', function () {
     $this->assertGuest();
 
-    $userToAuthenticate = User::factory()->create();
+    $userToAuthenticate = User::factory()->create([
+        'email' => 'test@' . config()->string('application.security_domain'),
+    ]);
 
     livewire(Login::class)
         ->fillForm([
@@ -27,4 +29,20 @@ test('Panel can be accessed', function () {
         ->assertRedirect(Filament::getUrl());
 
     $this->assertAuthenticatedAs($userToAuthenticate);
+});
+
+test('Panel cannot be accessed', function () {
+    $userToAuthenticate = User::factory()->create();
+
+    Filament::setCurrentPanel(Filament::getPanel('custom'));
+
+    livewire(Login::class)
+        ->fillForm([
+            'email' => $userToAuthenticate->email,
+            'password' => 'password',
+        ])
+        ->call('authenticate')
+        ->assertHasFormErrors(['email']);
+
+    $this->assertGuest();
 });
