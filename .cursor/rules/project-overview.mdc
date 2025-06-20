@@ -1,0 +1,39 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+# Project Overview
+
+This is a **Laravel + React + Inertia.js** application with TypeScript and Tailwind CSS. The project uses a modern full-stack architecture where Laravel serves as the backend API and Inertia.js bridges the gap between Laravel and React frontend.
+
+## Architecture
+
+- **Backend**: Laravel 12 with PHP 8.2+
+- **Frontend**: React 19 with TypeScript
+- **Styling**: Tailwind CSS 4.x
+- **Build Tool**: Vite 6.x
+- **Admin Panel**: Filament 3.x
+- **Database**: SQLite (development)
+- **Testing**: Pest PHP
+
+## Key Entry Points
+
+- **Laravel Entry**: [artisan](mdc:artisan) - Laravel CLI tool
+- **Frontend Entry**: [resources/js/app.tsx](mdc:resources/js/app.tsx) - React application bootstrap
+- **SSR Entry**: [resources/js/ssr.tsx](mdc:resources/js/ssr.tsx) - Server-side rendering
+- **Build Config**: [vite.config.ts](mdc:vite.config.ts) - Vite configuration
+- **TypeScript Config**: [tsconfig.json](mdc:tsconfig.json) - TypeScript settings
+
+## Package Management
+
+- **PHP Dependencies**: [composer.json](mdc:composer.json) - Laravel packages and PHP dependencies
+- **Node Dependencies**: [package.json](mdc:package.json) - React, TypeScript, and build tools
+
+## Development Scripts
+
+- `composer dev` - Start development server with hot reload
+- `composer dev:ssr` - Start development with SSR enabled
+- `npm run dev` - Start Vite dev server
+- `npm run build` - Build for production
+- `npm run build:ssr` - Build with SSR support

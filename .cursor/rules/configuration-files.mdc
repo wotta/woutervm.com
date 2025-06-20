@@ -1,0 +1,78 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+# Configuration Files
+
+## Build & Development Tools
+
+### Vite Configuration
+- **[vite.config.ts](mdc:vite.config.ts)** - Vite build tool configuration
+  - Laravel Vite plugin for asset compilation
+  - React plugin for JSX support
+  - Tailwind CSS plugin
+  - Ziggy alias for Laravel routes
+
+### TypeScript Configuration
+- **[tsconfig.json](mdc:tsconfig.json)** - TypeScript compiler options
+  - Path mapping: `@/*` → `resources/js/*`
+  - Ziggy integration
+  - React JSX support
+  - Strict type checking enabled
+
+### ESLint Configuration
+- **[eslint.config.js](mdc:eslint.config.js)** - JavaScript/TypeScript linting
+  - React-specific rules
+  - TypeScript support
+  - Prettier integration
+
+### Prettier Configuration
+- **[.prettierrc](mdc:.prettierrc)** - Code formatting rules
+- **[.prettierignore](mdc:.prettierignore)** - Files to ignore during formatting
+
+## Laravel Configuration
+
+### PHP Configuration
+- **[phpstan.neon](mdc:phpstan.neon)** - PHPStan static analysis
+- **[phpunit.xml](mdc:phpunit.xml)** - PHPUnit testing configuration
+- **[.editorconfig](mdc:.editorconfig)** - Editor settings for consistent formatting
+
+### Docker Configuration
+- **[docker-compose.yml](mdc:docker-compose.yml)** - Laravel Sail development environment
+
+## Package Management
+
+### PHP Dependencies
+- **[composer.json](mdc:composer.json)** - PHP packages and scripts
+  - Laravel Framework 12.x
+  - Filament admin panel
+  - Inertia.js Laravel adapter
+  - Development tools (PHPStan, Pest, etc.)
+
+### Node Dependencies
+- **[package.json](mdc:package.json)** - JavaScript packages and scripts
+  - React 19.x with TypeScript
+  - Inertia.js React adapter
+  - Tailwind CSS 4.x
+  - Build tools (Vite, ESLint, Prettier)
+
+### Component Configuration
+- **[components.json](mdc:components.json)** - shadcn/ui component configuration
+
+## Environment & Git
+
+### Environment Files
+- **.env.example** - Template for environment variables
+- **.env** - Local environment configuration (not in git)
+
+### Git Configuration
+- **[.gitignore](mdc:.gitignore)** - Files to exclude from version control
+- **[.gitattributes](mdc:.gitattributes)** - Git attributes for file handling
+
+## Blueprint Configuration
+- **[.blueprint](mdc:.blueprint)** - Laravel Blueprint code generation configuration
+- **[draft.yaml](mdc:draft.yaml)** - Blueprint draft configuration
+
+## Installation Script
+- **[install.sh](mdc:install.sh)** - Automated project setup script

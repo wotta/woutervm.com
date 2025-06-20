@@ -1,0 +1,49 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+# Laravel Backend Structure
+
+## Core Directories
+
+### App Directory
+- **[app/Models/](mdc:app/Models)** - Eloquent models for database interactions
+- **[app/Http/](mdc:app/Http)** - Controllers, middleware, and request/response handling
+- **[app/Providers/](mdc:app/Providers)** - Service providers for application bootstrapping
+- **[app/Filament/](mdc:app/Filament)** - Filament admin panel resources and pages
+- **[app/Settings/](mdc:app/Settings)** - Application settings and configuration
+
+### Configuration
+- **[config/](mdc:config)** - Laravel configuration files
+- **[database/](mdc:database)** - Migrations, seeders, and factories
+- **[routes/](mdc:routes)** - Route definitions (web.php, api.php, etc.)
+- **[bootstrap/](mdc:bootstrap)** - Application bootstrap files
+
+### Storage & Public
+- **[storage/](mdc:storage)** - File storage, logs, and cache
+- **[public/](mdc:public)** - Publicly accessible files and assets
+
+## Key Files
+
+- **[artisan](mdc:artisan)** - Laravel CLI commands
+- **[composer.json](mdc:composer.json)** - PHP dependencies and scripts
+- **[phpstan.neon](mdc:phpstan.neon)** - PHPStan static analysis configuration
+- **[phpunit.xml](mdc:phpunit.xml)** - PHPUnit testing configuration
+
+## Laravel Conventions
+
+- Use **Eloquent models** for database interactions
+- Follow **PSR-4 autoloading** standards
+- Use **service providers** for dependency injection
+- Implement **middleware** for request filtering
+- Use **artisan commands** for CLI operations
+- Follow **Laravel naming conventions** (snake_case for methods, PascalCase for classes)
+
+## Development Tools
+
+- **Laravel Sail** - Docker development environment
+- **Laravel Pail** - Log viewing and monitoring
+- **PHPStan** - Static analysis for type safety
+- **Laravel Pint** - Code style fixing
+- **Pest** - Testing framework

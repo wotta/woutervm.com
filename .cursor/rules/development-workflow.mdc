@@ -1,0 +1,119 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+# Development Workflow
+
+## Getting Started
+
+### Prerequisites
+- PHP 8.4+
+- Node.js 22+
+- Composer
+- Docker (for Laravel Sail)
+
+### Initial Setup
+```bash
+# Install PHP dependencies
+sail composer install
+
+# Install Node dependencies
+sail npm install
+
+# Copy environment file
+cp .env.example .env
+
+# Generate application key
+sail artisan key:generate
+
+# Create database
+touch database/database.sqlite
+
+# Run migrations
+sail artisan migrate
+```
+
+## Development Commands
+
+### Laravel Commands
+- `sail composer dev` - Start full development environment (Laravel + Vite + Queue + Logs)
+- `sail composer dev:ssr` - Start development with SSR enabled
+- `sail artisan queue:listen` - Start queue worker
+- `sail artisan pail` - View application logs
+
+### Frontend Commands
+- `sail npm run dev` - Start Vite development server
+- `sail npm run build` - Build for production
+- `sail npm run build:ssr` - Build with SSR support
+- `sail npm run lint` - Run ESLint with auto-fix
+- `sail npm run format` - Format code with Prettier
+- `sail npm run types` - Type-check TypeScript
+
+### Code Quality
+- `sail composer code:check` - Run PHPStan static analysis
+- `sail composer test` - Run PHP tests with Pest
+- `sail npm run format:check` - Check code formatting
+- `sail npm run lint` - Check and fix ESLint issues
+
+## File Structure Conventions
+
+### Laravel
+- Controllers in `app/Http/Controllers/`
+- Models in `app/Models/`
+- Migrations in `database/migrations/`
+- Routes in `routes/web.php` and `routes/api.php`
+- Service providers in `app/Providers/`
+
+### React/TypeScript
+- Pages in `resources/js/pages/`
+- Components in `resources/js/components/`
+- Utilities in `resources/js/lib/`
+- Types in `resources/js/types/`
+- CSS in `resources/css/`
+
+## Code Style
+
+### PHP
+- Follow PSR-12 coding standards
+- Use Laravel Pint for formatting
+- Use PHPStan for static analysis
+- Follow Laravel naming conventions
+
+### TypeScript/React
+- Use Prettier for formatting
+- Use ESLint for linting
+- Follow React best practices
+- Use TypeScript strict mode
+- Use functional components with hooks
+
+## Testing
+
+### PHP Testing
+- Use Pest PHP for testing
+- Tests located in `tests/`
+- Run with `composer test`
+
+### Frontend Testing
+- TypeScript type checking with `npm run types`
+- ESLint for code quality
+- Manual testing in browser
+
+## Deployment
+
+### Production Build
+```bash
+# Build frontend assets
+sail npm run build
+
+# Optimize Laravel
+sail php artisan optimize
+
+# Run migrations
+sail php artisan migrate --force
+```
+
+### Environment Configuration
+- Copy `.env.example` to `.env`
+- Configure database, mail, and other services
+- Set `APP_ENV=production` and `APP_DEBUG=false`

@@ -1,0 +1,65 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+# React Frontend Structure
+
+## Core Architecture
+
+This project uses **Inertia.js** to bridge Laravel and React, providing a SPA-like experience without building a separate API.
+
+## Directory Structure
+
+### Main Directories
+- **[resources/js/](mdc:resources/js)** - All JavaScript/TypeScript source code
+- **[resources/js/pages/](mdc:resources/js/pages)** - Inertia.js page components
+- **[resources/js/components/](mdc:resources/js/components)** - Reusable React components
+- **[resources/js/lib/](mdc:resources/js/lib)** - Utility functions and helpers
+- **[resources/js/types/](mdc:resources/js/types)** - TypeScript type definitions
+
+### Key Files
+- **[resources/js/app.tsx](mdc:resources/js/app.tsx)** - Main React application bootstrap
+- **[resources/js/ssr.tsx](mdc:resources/js/ssr.tsx)** - Server-side rendering setup
+- **[resources/css/app.css](mdc:resources/css/app.css)** - Global CSS styles
+
+## Page Components
+
+Current pages in **[resources/js/pages/](mdc:resources/js/pages)**:
+- **[home.tsx](mdc:resources/js/pages/home.tsx)** - Homepage
+- **[about.tsx](mdc:resources/js/pages/about.tsx)** - About page
+- **[resume.tsx](mdc:resources/js/pages/resume.tsx)** - Resume page
+
+## Component Structure
+
+### UI Components
+- **[resources/js/components/ui/](mdc:resources/js/components/ui)** - Reusable UI components (likely shadcn/ui)
+- **[resources/js/components/header.tsx](mdc:resources/js/components/header.tsx)** - Site header
+- **[resources/js/components/footer.tsx](mdc:resources/js/components/footer.tsx)** - Site footer
+- **[resources/js/components/hero.tsx](mdc:resources/js/components/hero.tsx)** - Hero section
+- **[resources/js/components/contact.tsx](mdc:resources/js/components/contact.tsx)** - Contact form
+- **[resources/js/components/projects.tsx](mdc:resources/js/components/projects.tsx)** - Projects showcase
+- **[resources/js/components/skills.tsx](mdc:resources/js/components/skills.tsx)** - Skills display
+- **[resources/js/components/experience-timeline.tsx](mdc:resources/js/components/experience-timeline.tsx)** - Experience timeline
+
+## Inertia.js Integration
+
+- Pages are automatically resolved from **[resources/js/pages/](mdc:resources/js/pages)**
+- Use `router.visit()` for navigation between pages
+- Props are passed from Laravel controllers to React components
+- Server-side rendering is supported via **[resources/js/ssr.tsx](mdc:resources/js/ssr.tsx)**
+
+## TypeScript Configuration
+
+- **Base URL**: `@/*` maps to `resources/js/*`
+- **Ziggy Integration**: `ziggy-js` alias for Laravel route generation
+- **JSX**: React JSX with automatic runtime
+- **Strict Mode**: Enabled for better type safety
+
+## Styling
+
+- **Tailwind CSS 4.x** for utility-first styling
+- **Tailwind CSS Animate** for animations
+- **Class Variance Authority** for component variants
+- **Tailwind Merge** for class merging utilities
+
