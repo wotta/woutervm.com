@@ -3,8 +3,12 @@
 import { Button } from "@/components/ui/button"
 import { ArrowDown } from "lucide-react"
 import { Link } from "@inertiajs/react"
+import { useSettings } from "@/lib/useSettings";
 
 export function Hero() {
+  const { settings, get } = useSettings();
+  const heroBackground = get('appearance.hero_background');
+
   const scrollToProjects = () => {
     const element = document.getElementById("projects")
     if (element) {
@@ -18,7 +22,7 @@ export function Hero() {
         <div className="grid lg:grid-cols-2 min-h-[calc(100vh-5rem)]">
           {/* Image Section */}
           <div className="relative overflow-hidden bg-gray-100">
-            {/*<img src="/images/wouter.png" alt="Profile" className="w-full h-full object-cover object-center" />*/}
+            <img src={heroBackground} alt="Profile" className="w-full h-full object-cover object-center" />
           </div>
 
           {/* Content Section */}
