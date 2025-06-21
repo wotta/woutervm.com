@@ -60,7 +60,6 @@ services:
         environment:
             MINIO_ROOT_USER: sail
             MINIO_ROOT_PASSWORD: password
-            MINIO_DEFAULT_BUCKETS: 'local:public'
         volumes:
             - 'sail-minio:/data'
         networks:
@@ -74,6 +73,26 @@ services:
                 - local
             retries: 3
             timeout: 5s
+    minio-setup:
+        image: 'minio/mc:latest'
+        depends_on:
+            minio:
+                condition: service_healthy
+        networks:
+            - sail
+        entrypoint: >
+            /bin/sh -c "
+            echo 'Waiting for MinIO to be ready...';
+            until /usr/bin/mc alias set minio http://minio:9000 sail password; do
+                echo 'MinIO not ready yet, waiting...';
+                sleep 2;
+            done;
+            echo 'MinIO is ready, creating bucket...';
+            /usr/bin/mc mb minio/local --ignore-existing;
+            /usr/bin/mc anonymous set public minio/local;
+            echo 'MinIO setup completed successfully!';
+            exit 0;
+            "
     mailpit:
         image: 'axllent/mailpit:latest'
         ports:
