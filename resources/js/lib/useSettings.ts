@@ -109,6 +109,14 @@ export function useSettings() {
         toolsTechnologies: settings['skills.tools_technologies'] || [],
         currentlyLearning: settings['skills.currently_learning'] || [],
       }
+    },
+
+    hasAnySkills: () => {
+      const settings = props.settings || {};
+      const skillsSettings = Object.keys(settings)
+          .filter(key => key.startsWith('skills.'))
+          .map(key => settings[key]);
+      return skillsSettings.some((skill: any) => Array.isArray(skill) && skill.length > 0);
     }
   }
 }
