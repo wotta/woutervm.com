@@ -8,10 +8,7 @@ import { useSettings } from "@/lib/useSettings"
 import { Head } from "@inertiajs/react"
 
 export default function Home() {
-
-  const { settings, get } = useSettings();
-
-  console.log(get('site.name'));
+  const { get } = useSettings();
 
   return (
     <>

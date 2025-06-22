@@ -4,11 +4,13 @@ import { Link, usePage } from '@inertiajs/react';
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
+import { useSettings } from "@/lib/useSettings";
 
 export function Header() {
   const [activeSection, setActiveSection] = useState("home")
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const { url } = usePage();
+  const { get } = useSettings();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -33,7 +35,6 @@ export function Header() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [url])
 
-  // Close mobile menu when clicking outside
   useEffect(() => {
     if (mobileMenuOpen) {
       const handleClickOutside = () => setMobileMenuOpen(false)
@@ -68,7 +69,7 @@ export function Header() {
             onClick={() => scrollToSection("home")}
             className="text-xl font-semibold text-gray-900 hover:text-gray-600 transition-colors"
           >
-            Wouter van Marrum
+            {get('site.name')}
           </button>
 
           {/* Desktop Navigation */}

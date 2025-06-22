@@ -6,7 +6,7 @@ import { Link } from "@inertiajs/react"
 import { useSettings } from "@/lib/useSettings";
 
 export function Hero() {
-  const { settings, get } = useSettings();
+  const { get } = useSettings();
   const heroBackground = get('appearance.hero_background');
 
   const scrollToProjects = () => {
@@ -34,14 +34,12 @@ export function Hero() {
                   <div className="h-1 w-16 rounded-full bg-gradient-to-r from-stone-800 via-stone-500 to-stone-300"></div>
                 </div>
                 <h1 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-stone-900 mb-6 leading-tight tracking-wide">
-                  ABOUT WOUTER VAN MARRUM
+                  {get('site.tagline')}
                 </h1>
               </div>
 
               <p className="text-lg lg:text-xl text-stone-700 mb-8 leading-relaxed">
-                A passionate developer who creates clean, functional, and user-centered digital experiences. I
-                specialize in modern web technologies and love turning complex problems into simple, beautiful
-                solutions.
+                {get('site.description')}
               </p>
 
               <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-12">
