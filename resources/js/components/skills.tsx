@@ -49,14 +49,15 @@ export function Skills() {
             Always learning and exploring new technologies to stay current with industry trends.
           </p>
           <div className="flex flex-wrap justify-center gap-3">
-            {["Currently learning", "GraphQL", "Three.js", "Rust"].map((item, index) => (
+            <span className="px-4 py-2 rounded-full text-sm bg-gray-900 text-white">
+              Currently learning
+            </span>
+            {skills.currentlyLearning.map((skill: string, index: number) => (
               <span
                 key={index}
-                className={`px-4 py-2 rounded-full text-sm ${
-                  index === 0 ? "bg-gray-900 text-white" : "bg-gray-100 text-gray-700"
-                }`}
+                className="px-4 py-2 rounded-full text-sm bg-gray-100 text-gray-700"
               >
-                {item}
+                {skill}
               </span>
             ))}
           </div>

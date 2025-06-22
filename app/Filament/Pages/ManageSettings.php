@@ -172,6 +172,7 @@ class ManageSettings extends Page implements HasForms
 
             'tags' => TagsInput::make($fieldName)
                 ->label($label)
+                ->reorderable()
                 ->helperText($helperText)
                 ->required($required),
 

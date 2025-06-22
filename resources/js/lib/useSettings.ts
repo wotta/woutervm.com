@@ -107,6 +107,7 @@ export function useSettings() {
         frontendDevelopment: settings['skills.frontend_development'] || [],
         backendDevelopment: settings['skills.backend_development'] || [],
         toolsTechnologies: settings['skills.tools_technologies'] || [],
+        currentlyLearning: settings['skills.currently_learning'] || [],
       }
     }
   }

@@ -288,6 +288,20 @@ class SettingSeeder extends Seeder
     {
         return [
             [
+                'key' => 'skills.currently_learning',
+                'value' => json_encode([
+                    'React',
+                    'Tailwind CSS',
+                    'AI',
+                ]),
+                'type' => 'tags',
+                'group' => 'resume',
+                'description' => 'Currently learning',
+                'is_public' => true,
+                'validation_rules' => ['json'],
+                'sort_order' => 1,
+            ],
+            [
                 'key' => 'skills.frontend_development',
                 'value' => json_encode([
                     'JavaScript (ES6+)',
