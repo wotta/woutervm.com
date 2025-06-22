@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Setting;
 
@@ -14,7 +13,35 @@ class SettingSeeder extends Seeder
     public function run(): void
     {
         $defaultSettings = [
-            // General Settings
+            ...$this->getSiteSettings(),
+
+            ...$this->getContactSettings(),
+
+            ...$this->getSocialSettings(),
+
+            ...$this->getSeoSettings(),
+
+            ...$this->getAppearanceSettings(),
+
+            ...$this->getFeaturesSettings(),
+
+            ...$this->getResumeSettings(),
+        ];
+
+        foreach ($defaultSettings as $settingData) {
+            Setting::updateOrCreate(
+                ['key' => $settingData['key']],
+                $settingData
+            );
+        }
+    }
+
+    /**
+     * @return array<array-key, array<string, mixed>>
+     */
+    private function getSiteSettings(): array
+    {
+        return [
             [
                 'key' => 'site.name',
                 'value' => 'Wouter',
@@ -38,7 +65,7 @@ class SettingSeeder extends Seeder
             ],
             [
                 'key' => 'site.description',
-                'value' => 'Personal portfolio and blog of Wouter, showcasing full-stack development projects and technical insights.',
+                'value' => 'A passionate developer who creates clean, functional, and user-centered digital experiences. I specialize in modern web technologies and love turning complex problems into simple, beautiful solutions.',
                 'type' => 'string',
                 'group' => 'general',
                 'description' => 'Site meta description',
@@ -76,8 +103,15 @@ class SettingSeeder extends Seeder
                 'validation_rules' => ['file', 'max:1024'],
                 'sort_order' => 6,
             ],
+        ];
+    }
 
-            // Contact Information
+    /**
+     * @return array<array-key, array<string, mixed>>
+     */
+    private function getContactSettings(): array
+    {
+        return [
             [
                 'key' => 'contact.email',
                 'value' => 'hello@woutervm.com',
@@ -108,8 +142,15 @@ class SettingSeeder extends Seeder
                 'validation_rules' => ['string', 'max:500'],
                 'sort_order' => 3,
             ],
+        ];
+    }
 
-            // Social Media
+    /**
+     * @return array<array-key, array<string, mixed>>
+     */
+    private function getSocialSettings(): array
+    {
+        return [
             [
                 'key' => 'social.github',
                 'value' => 'https://github.com/wotta',
@@ -140,8 +181,15 @@ class SettingSeeder extends Seeder
                 'validation_rules' => ['url'],
                 'sort_order' => 3,
             ],
+        ];
+    }
 
-            // SEO Settings
+    /**
+     * @return array<array-key, array<string, mixed>>
+     */
+    private function getSeoSettings(): array
+    {
+        return [
             [
                 'key' => 'seo.robots_txt',
                 'value' => "User-agent: *\nDisallow:",
@@ -152,8 +200,15 @@ class SettingSeeder extends Seeder
                 'validation_rules' => ['string'],
                 'sort_order' => 3,
             ],
+        ];
+    }
 
-            // Appearance Settings
+    /**
+     * @return array<array-key, array<string, mixed>>
+     */
+    private function getAppearanceSettings(): array
+    {
+        return [
             [
                 'key' => 'appearance.theme',
                 'value' => 'auto',
@@ -184,8 +239,15 @@ class SettingSeeder extends Seeder
                 'validation_rules' => ['image', 'max:5120'],
                 'sort_order' => 3,
             ],
+        ];
+    }
 
-            // Features
+    /**
+     * @return array<array-key, array<string, mixed>>
+     */
+    private function getFeaturesSettings(): array
+    {
+        return [
             [
                 'key' => 'features.blog_enabled',
                 'value' => '1',
@@ -217,12 +279,71 @@ class SettingSeeder extends Seeder
                 'sort_order' => 3,
             ],
         ];
+    }
 
-        foreach ($defaultSettings as $settingData) {
-            Setting::updateOrCreate(
-                ['key' => $settingData['key']],
-                $settingData
-            );
-        }
+    /**
+     * @return array<array-key, array<string, mixed>>
+     */
+    private function getResumeSettings(): array
+    {
+        return [
+            [
+                'key' => 'skills.frontend_development',
+                'value' => json_encode([
+                    'JavaScript (ES6+)',
+                    'TypeScript',
+                    'React',
+                    'Next.js',
+                    'Vue.js',
+                    'HTML5 & CSS3',
+                    'Tailwind CSS',
+                    'Responsive Design'
+                ]),
+                'type' => 'tags',
+                'group' => 'resume',
+                'description' => 'Frontend development skills',
+                'is_public' => true,
+                'validation_rules' => ['json'],
+                'sort_order' => 2,
+            ],
+            [
+                'key' => 'skills.backend_development',
+                'value' => json_encode([
+                    'Node.js',
+                    'Express.js',
+                    'Python',
+                    'PostgreSQL',
+                    'MongoDB',
+                    'REST APIs',
+                    'GraphQL',
+                    'Authentication'
+                ]),
+                'type' => 'tags',
+                'group' => 'resume',
+                'description' => 'Backend development skills',
+                'is_public' => true,
+                'validation_rules' => ['json'],
+                'sort_order' => 3,
+            ],
+            [
+                'key' => 'skills.tools_technologies',
+                'value' => json_encode([
+                    'Git & GitHub',
+                    'Docker',
+                    'AWS',
+                    'Vercel',
+                    'Figma',
+                    'VS Code',
+                    'Webpack',
+                    'Testing (Jest, Cypress)'
+                ]),
+                'type' => 'tags',
+                'group' => 'resume',
+                'description' => 'Tools and technologies',
+                'is_public' => true,
+                'validation_rules' => ['json'],
+                'sort_order' => 4,
+            ],
+        ];
     }
 }

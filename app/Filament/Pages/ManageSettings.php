@@ -10,6 +10,7 @@ use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Tabs;
 use Filament\Forms\Components\Tabs\Tab;
+use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
@@ -167,6 +168,11 @@ class ManageSettings extends Page implements HasForms
                 ->image()
                 ->imageEditor()
                 ->maxSize(5120)
+                ->required($required),
+
+            'tags' => TagsInput::make($fieldName)
+                ->label($label)
+                ->helperText($helperText)
                 ->required($required),
 
             'string' => $this->createStringField($setting, $fieldName, $label, $helperText, $required),

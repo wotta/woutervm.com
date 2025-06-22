@@ -13,15 +13,15 @@ return new class extends Migration
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
-            $table->string('key')->unique(); // e.g., 'site.title', 'site.favicon'
-            $table->text('value')->nullable(); // JSON-encoded value for complex types
+            $table->string('key')->unique();
+            $table->text('value')->nullable();
             $table->enum('type', ['string', 'boolean', 'integer', 'float', 'file', 'image', 'url', 'email', 'json'])->default('string');
-            $table->string('group')->nullable(); // for organizing: 'general', 'seo', 'appearance'
-            $table->text('description')->nullable(); // human-readable description
-            $table->boolean('is_public')->default(false); // whether setting can be accessed on frontend
-            $table->json('validation_rules')->nullable(); // Laravel validation rules
-            $table->integer('sort_order')->default(0); // for custom ordering
-            $table->boolean('is_locked')->default(false); // prevent deletion of core settings
+            $table->string('group')->nullable();
+            $table->text('description')->nullable();
+            $table->boolean('is_public')->default(false);
+            $table->json('validation_rules')->nullable();
+            $table->integer('sort_order')->default(0);
+            $table->boolean('is_locked')->default(false);
             $table->timestamps();
 
             // Indexes for better performance
