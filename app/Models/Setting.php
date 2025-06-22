@@ -63,7 +63,7 @@ class Setting extends Model
             'boolean' => filter_var($this->value, FILTER_VALIDATE_BOOLEAN),
             'integer' => (int) $this->value,
             'float' => (float) $this->value,
-            'json' => json_decode($this->value, true),
+            'json', 'tags' => json_decode($this->value, true),
             'file', 'image' => $this->value ? Storage::url($this->value) : null,
             default => $this->value,
         };
@@ -118,7 +118,7 @@ class Setting extends Model
             'boolean' => filter_var($setting['value'], FILTER_VALIDATE_BOOLEAN),
             'integer' => (int) $setting['value'],
             'float' => (float) $setting['value'],
-            'json' => json_decode($setting['value'], true),
+            'json', 'tags' => json_decode($setting['value'], true),
             'file', 'image' => $setting['value'] ? Storage::url($setting['value']) : null,
             default => $setting['value'],
         };
@@ -144,7 +144,7 @@ class Setting extends Model
         // Convert value to string for storage
         $setting->value = match ($type ?? $setting->type) {
             'boolean' => $value ? '1' : '0',
-            'json' => json_encode($value),
+            'json', 'tags' => json_encode($value),
             default => (string) $value,
         };
 
@@ -223,7 +223,7 @@ class Setting extends Model
             'boolean' => filter_var($value, FILTER_VALIDATE_BOOLEAN),
             'integer' => (int) $value,
             'float' => (float) $value,
-            'json' => json_decode($value, true),
+            'json', 'tags' => json_decode($value, true),
             'file', 'image' => $value ? Storage::url($value) : null,
             default => $value,
         };
@@ -247,6 +247,10 @@ class Setting extends Model
         }
 
         if (is_array($value)) {
+            // If array contains only strings, treat as tags
+            if (array_is_list($value) && !empty($value) && array_filter($value, 'is_string') === $value) {
+                return 'tags';
+            }
             return 'json';
         }
 

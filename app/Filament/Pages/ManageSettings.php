@@ -69,7 +69,7 @@ class ManageSettings extends Page implements HasForms
                 'boolean' => filter_var($setting->value, FILTER_VALIDATE_BOOLEAN),
                 'integer' => (int) ($setting->value ?? 0),
                 'float' => (float) ($setting->value ?? 0.0),
-                'json' => json_decode($setting->value ?? '[]', true),
+                'json', 'tags' => json_decode($setting->value ?? '[]', true),
                 default => $setting->value ?? '',
             };
         }
@@ -237,6 +237,7 @@ class ManageSettings extends Page implements HasForms
             'seo' => 'heroicon-o-magnifying-glass',
             'appearance' => 'heroicon-o-paint-brush',
             'features' => 'heroicon-o-puzzle-piece',
+            'resume' => 'heroicon-o-document-text',
             default => 'heroicon-o-cog-6-tooth',
         };
     }
@@ -283,7 +284,7 @@ class ManageSettings extends Page implements HasForms
 
             $processedValue = match ($setting->type) {
                 'boolean' => $value ? '1' : '0',
-                'json' => json_encode($value),
+                'json', 'tags' => json_encode($value),
                 default => (string) $value,
             };
 

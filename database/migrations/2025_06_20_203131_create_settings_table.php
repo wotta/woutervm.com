@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('key')->unique();
             $table->text('value')->nullable();
-            $table->enum('type', ['string', 'boolean', 'integer', 'float', 'file', 'image', 'url', 'email', 'json'])->default('string');
+            $table->enum('type', ['string', 'boolean', 'integer', 'float', 'file', 'image', 'url', 'email', 'json', 'tags'])->default('string');
             $table->string('group')->nullable();
             $table->text('description')->nullable();
             $table->boolean('is_public')->default(false);

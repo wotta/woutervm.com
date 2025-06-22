@@ -1,28 +1,23 @@
-const skillCategories = [
-  {
-    title: "Frontend Development",
-    skills: [
-      "JavaScript (ES6+)",
-      "TypeScript",
-      "React",
-      "Next.js",
-      "Vue.js",
-      "HTML5 & CSS3",
-      "Tailwind CSS",
-      "Responsive Design",
-    ],
-  },
-  {
-    title: "Backend Development",
-    skills: ["Node.js", "Express.js", "Python", "PostgreSQL", "MongoDB", "REST APIs", "GraphQL", "Authentication"],
-  },
-  {
-    title: "Tools & Technologies",
-    skills: ["Git & GitHub", "Docker", "AWS", "Vercel", "Figma", "VS Code", "Webpack", "Testing (Jest, Cypress)"],
-  },
-]
+import { useSettings } from "../lib/useSettings"
 
 export function Skills() {
+  const { getSkills } = useSettings()
+  const skills = getSkills()
+
+  const skillCategories = [
+    {
+      title: "Frontend Development",
+      skills: skills.frontendDevelopment,
+    },
+    {
+      title: "Backend Development",
+      skills: skills.backendDevelopment,
+    },
+    {
+      title: "Tools & Technologies",
+      skills: skills.toolsTechnologies,
+    },
+  ]
   return (
     <section id="skills" className="py-20 px-6">
       <div className="max-w-4xl mx-auto">
@@ -38,7 +33,7 @@ export function Skills() {
             <div key={index} className="text-center md:text-left">
               <h3 className="text-xl font-semibold text-gray-900 mb-6">{category.title}</h3>
               <div className="space-y-3">
-                {category.skills.map((skill, skillIndex) => (
+                {category.skills.map((skill: string, skillIndex: number) => (
                   <div key={skillIndex} className="flex items-center justify-center md:justify-start">
                     <div className="w-2 h-2 bg-gray-400 rounded-full mr-3 hidden md:block" />
                     <span className="text-gray-600">{skill}</span>

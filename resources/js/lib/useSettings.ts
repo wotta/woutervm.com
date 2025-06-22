@@ -1,4 +1,5 @@
 import { usePage } from '@inertiajs/react'
+import { PageProps as InertiaPageProps } from '@inertiajs/core'
 
 export interface SiteConfig {
   name: string
@@ -13,7 +14,7 @@ export interface Settings {
   [key: string]: any
 }
 
-export interface PageProps {
+export interface PageProps extends InertiaPageProps {
   settings: Settings
   site: SiteConfig
 }
@@ -94,6 +95,18 @@ export function useSettings() {
         blogEnabled: settings['features.blog_enabled'] ?? true,
         contactFormEnabled: settings['features.contact_form_enabled'] ?? true,
         projectsPerPage: settings['features.projects_per_page'] || 6,
+      }
+    },
+
+    /**
+     * Get skills organized by category
+     */
+    getSkills: () => {
+      const settings = props.settings || {}
+      return {
+        frontendDevelopment: settings['skills.frontend_development'] || [],
+        backendDevelopment: settings['skills.backend_development'] || [],
+        toolsTechnologies: settings['skills.tools_technologies'] || [],
       }
     }
   }
