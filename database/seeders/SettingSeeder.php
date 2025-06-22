@@ -163,7 +163,7 @@ class SettingSeeder extends Seeder
             ],
             [
                 'key' => 'social.linkedin',
-                'value' => 'https://linkedin.com/in/',
+                'value' => 'https://linkedin.com/in/wouter-van-marrum',
                 'type' => 'url',
                 'group' => 'social',
                 'description' => 'LinkedIn profile URL',
@@ -173,7 +173,7 @@ class SettingSeeder extends Seeder
             ],
             [
                 'key' => 'social.twitter',
-                'value' => 'https://x.com/wotta',
+                'value' => 'https://x.com/wottavm',
                 'type' => 'url',
                 'group' => 'social',
                 'description' => 'Twitter/X profile URL',
