@@ -37,7 +37,7 @@ class PageResource extends Resource
                             ->required()
                             ->maxLength(255)
                             ->live(onBlur: true)
-                            ->afterStateUpdated(fn (Set $set, ?string $state) => 
+                            ->afterStateUpdated(fn (Set $set, ?string $state) =>
                                 $set('slug', Str::slug($state))),
 
                         Forms\Components\TextInput::make('slug')
@@ -253,7 +253,23 @@ class PageResource extends Resource
 
                 Tables\Filters\SelectFilter::make('parent')
                     ->relationship('parent', 'title')
-                    ->label('Parent Page'),
+                    ->label('Parent Page')
+                    ->searchable()
+                    ->preload(),
+
+                Tables\Filters\SelectFilter::make('has_children')
+                    ->label('Has Children')
+                    ->options([
+                        'with_children' => 'With Children',
+                        'without_children' => 'Without Children',
+                    ])
+                    ->query(function (Builder $query, array $data): Builder {
+                        return match ($data['value'] ?? null) {
+                            'with_children' => $query->has('children'),
+                            'without_children' => $query->doesntHave('children'),
+                            default => $query,
+                        };
+                    }),
             ])
             ->actions([
                 Tables\Actions\ActionGroup::make([
