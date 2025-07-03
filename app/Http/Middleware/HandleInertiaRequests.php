@@ -56,6 +56,60 @@ class HandleInertiaRequests extends Middleware
             'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
             'settings' => fn (): array => SettingsHelper::getPublic(),
             'site' => fn (): array => SettingsHelper::getSiteConfig(),
+            'projects' => fn (): array => $this->getProjectsData($request),
         ];
+    }
+
+    private function getProjectsData(Request $request): array
+    {
+        $query = \App\Models\Project::query()->visible()->ordered();
+
+        // Handle search
+        if ($search = $request->get('search')) {
+            $query->where('title', 'like', "%{$search}%");
+        }
+
+        // Handle tag filtering
+        if ($tags = $request->get('tags')) {
+            $tagsArray = is_array($tags) ? $tags : explode(',', $tags);
+            foreach ($tagsArray as $tag) {
+                $query->whereJsonContains('tags', trim($tag));
+            }
+        }
+
+        // Handle visibility filtering (defaults to visible only)
+        if ($request->has('visible')) {
+            $visible = filter_var($request->get('visible'), FILTER_VALIDATE_BOOLEAN);
+            $query->where('visible', $visible);
+        }
+
+        // Handle sorting
+        $sortBy = $request->get('sort_by', 'sort_order');
+        $sortDirection = $request->get('sort_direction', 'asc');
+
+        if (in_array($sortBy, ['id', 'created_at', 'updated_at', 'sort_order'])) {
+            $query->orderBy($sortBy, $sortDirection);
+        }
+
+        return $query->get()->map(function ($project) {
+            return [
+                'id' => $project->id,
+                'title' => $project->title,
+                'slug' => $project->slug,
+                'short_description' => $project->short_description,
+                'long_form_content' => $project->long_form_content,
+                'tags' => $project->tags ?? [],
+                'project_image_url' => $project->project_image_url,
+                'project_image_thumbnail_url' => $project->project_image_thumbnail_url,
+                'live_demo_link' => $project->live_demo_link,
+                'github_link' => $project->github_link,
+                'featured' => $project->featured,
+                'visible' => $project->visible,
+                'sort_order' => $project->sort_order,
+                'meta_description' => $project->meta_description,
+                'created_at' => $project->created_at?->toISOString(),
+                'updated_at' => $project->updated_at?->toISOString(),
+            ];
+        })->toArray();
     }
 }

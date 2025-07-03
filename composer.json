@@ -9,13 +9,16 @@
         "php": "^8.2",
         "filament/filament": "^3.3",
         "inertiajs/inertia-laravel": "^2.0",
+        "intervention/image": "^3.11",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",
         "league/flysystem-aws-s3-v3": "^3.0",
         "league/flysystem-read-only": "^3.0",
+        "moe-mizrak/laravel-openrouter": "^2.2",
         "tightenco/ziggy": "^2.4"
     },
     "require-dev": {
+        "beyondcode/laravel-dump-server": "^2.1",
         "fakerphp/faker": "^1.23",
         "larastan/larastan": "^3.0",
         "laravel-shift/blueprint": "^2.12",
